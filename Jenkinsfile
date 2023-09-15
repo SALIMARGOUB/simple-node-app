@@ -1,30 +1,28 @@
 pipeline {
-    agent any
+    agent any 
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
-        stage('Install') {
-            steps {
-                sh 'npm install'
-            }
-        }
-
         stage('Build') {
             steps {
-                sh 'npm run build' // Si vous avez un script de build dans votre package.json
+                script {
+                    docker.build("monapp")
+                }
             }
         }
 
         stage('Test') {
             steps {
-                sh 'npm test'
+                echo "Ici, vous pouvez ajouter des étapes pour tester votre application."
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    docker.image("monapp").push()
+                }
             }
         }
     }
-    
 }
+
