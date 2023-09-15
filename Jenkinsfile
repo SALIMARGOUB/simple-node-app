@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    docker.build("monapp")
+                    def appImage = docker.build("monapp")
                 }
             }
         }
@@ -19,10 +19,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    docker.image("monapp").push()
+                    docker.withRegistry('https://your.docker.registry', 'YourDockerCredentialsID') {
+                        appImage.push("latest")
+                    }
                 }
             }
         }
     }
 }
-
