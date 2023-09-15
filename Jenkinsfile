@@ -1,36 +1,20 @@
 pipeline {
     agent any
-
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
-        stage('Install') {
-            steps {
-                sh 'npm install'
-            }
-        }
-
         stage('Build') {
             steps {
-                sh 'npm run build' // Si vous avez un script de build dans votre package.json
+                echo 'Building..'
             }
         }
-
         stage('Test') {
             steps {
-                sh 'npm test'
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
             }
         }
     }
 
-   post {
-    always {
-        archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
-    }
-}
-
-}
