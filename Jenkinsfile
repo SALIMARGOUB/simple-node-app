@@ -27,9 +27,10 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            // Vous pouvez ajouter des étapes à exécuter après le pipeline ici, comme l'archivage des logs, etc.
-        }
+   post {
+    always {
+        archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
     }
+}
+
 }
