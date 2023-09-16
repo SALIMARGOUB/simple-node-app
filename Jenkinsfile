@@ -1,8 +1,9 @@
 pipeline {
     agent any 
 
-    environment {
+     environment {
         DOCKER_IMAGE = 'goubar/mon_site_web'
+        PATH = "/usr/bin:$PATH"
     }
 
     stages {
