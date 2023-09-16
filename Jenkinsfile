@@ -1,34 +1,34 @@
 pipeline {
     agent any 
 
+    environment {
+        DOCKER_IMAGE = 'goubar/mon_site_web'
+    }
+
     stages {
-        stage('Build') {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build Docker Image') {
             steps {
                 script {
-                    def appImage = docker.build("mon-application")
+                    sh "docker build -t ${DOCKER_IMAGE}:latest ."
                 }
             }
         }
 
-        stage('Test') {
+        stage('Push Docker Image') {
             steps {
-                script {
-                    docker.image("mon-application").inside {
-                        sh 'npm run test'
-                    }
+                withCredentials([usernamePassword(credentialsId: 'Votre_Credentiel_Docker', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                    sh """
+                        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+                        docker push ${DOCKER_IMAGE}:latest
+                    """
                 }
             }
-        }
-
-        stage('Deploy') {
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        def appImage = docker.image("mon-application")
-                        appImage.push("${env.BUILD_NUMBER}")
-                        appImage.push("latest")
-                    }
-                }
         }
     }
 }
