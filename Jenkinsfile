@@ -2,7 +2,7 @@ pipeline {
     agent any 
 
     environment {
-        DOCKER_IMAGE = 'votre_identifiant_docker/mon_site_web'
+        DOCKER_IMAGE = 'goubar/mon_site_web'
     }
 
     stages {
