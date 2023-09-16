@@ -22,10 +22,12 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-            script {
-                sh "/usr/bin/docker build -t ${DOCKER_IMAGE}:latest ."
-            }
+        script {
+            sh "docker build -t ${DOCKER_IMAGE}:latest ."
         }
+    }
+}
+
     }
 
 
