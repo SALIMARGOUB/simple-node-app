@@ -26,7 +26,7 @@ pipeline {
                 script {
                     sh 'echo $PATH'
                     sh 'docker --version'
-                    sh "sudo docker build -t ${DOCKER_IMAGE}:latest ."
+                    sh "docker build -t ${DOCKER_IMAGE}:latest ."
                     
                 }
             }
