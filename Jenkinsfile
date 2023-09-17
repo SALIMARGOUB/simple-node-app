@@ -3,6 +3,8 @@ pipeline {
     environment {
         PATH = "/usr/bin:$PATH"
         DOCKER_IMAGE = 'goubar/mon_site_web'
+        DOCKER_HOST = "unix:///var/run/docker.sock"
+
     }
     stages {
         stage('Print Node Name') {
