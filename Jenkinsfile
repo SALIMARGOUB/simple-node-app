@@ -1,10 +1,9 @@
 pipeline {
     agent any
-
     environment {
+        PATH = "/usr/bin:$PATH"
         DOCKER_IMAGE = 'goubar/mon_site_web'
     }
-
     stages {
         stage('Print Node Name') {
             steps {
