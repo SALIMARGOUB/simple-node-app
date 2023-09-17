@@ -29,7 +29,7 @@ pipeline {
                 script {
                     sh 'echo $PATH'
                     sh 'docker --version'
-                    sh 'sudo docker build -t goubar/mon_site_web:latest .'
+                    sh 'docker build -t goubar/mon_site_web:latest .'
 
                     
                 }
