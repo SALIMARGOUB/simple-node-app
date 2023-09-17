@@ -22,11 +22,15 @@ pipeline {
         }
 
         stage('Build Docker Image') {
+            environment {
+                DOCKER_HOST = '/var/run/docker.sock'
+            }
             steps {
                 script {
                     sh 'echo $PATH'
                     sh 'docker --version'
-                    sh "docker build -t ${DOCKER_IMAGE}:latest ."
+                    sh 'docker build -t goubar/mon_site_web:latest .'
+
                     
                 }
             }
