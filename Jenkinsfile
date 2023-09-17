@@ -23,6 +23,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
+                    sh 'echo $PATH'
+                    sh 'docker --version'
                     sh "docker build -t ${DOCKER_IMAGE}:latest ."
                 }
             }
