@@ -27,16 +27,7 @@ pipeline {
                 }
             }
         }
-
-        stage('Run Docker Container') {
-            steps {
-                script {
-                    sh 'docker run -d -p 8081:80 goubar/mon_site_web:latest
-'
-        }
-    }
-}
-
+        
 
         stage('Push Docker Image') {
             steps {
