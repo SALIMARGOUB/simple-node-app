@@ -23,13 +23,19 @@ pipeline {
         
             steps {
                 script {
-                    
                     sh 'docker build -t goubar/mon_site_web:latest .'
-
-                    
                 }
             }
         }
+
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    sh 'docker run -d -p 8080:81 goubar/mon_site_web:latest'
+        }
+    }
+}
+
 
         stage('Push Docker Image') {
             steps {
