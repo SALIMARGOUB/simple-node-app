@@ -1,7 +1,6 @@
 pipeline {
     agent any
     environment {
-        PATH = "/usr/bin:$PATH"
         DOCKER_IMAGE = 'goubar/mon_site_web'
         DOCKER_HOST = "unix:///var/run/docker.sock"
     }
@@ -21,9 +20,7 @@ pipeline {
         }
 
         stage('Build Docker Image') {
-            environment {
-                DOCKER_HOST = '/var/run/docker.sock'
-            }
+        
             steps {
                 script {
                     
