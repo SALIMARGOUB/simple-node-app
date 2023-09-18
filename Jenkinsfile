@@ -31,7 +31,8 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    sh 'docker run -d -p 8080:81 goubar/mon_site_web:latest'
+                    sh 'docker run -d -p 8081:80 goubar/mon_site_web:latest
+'
         }
     }
 }
